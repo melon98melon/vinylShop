@@ -12,7 +12,6 @@ const App = () => {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // cart handlers -> unidirectional data flow
   //event handler to add items to the cart
   const handleAddToCart = (product, quantity = 1) => {
     setCart((prevCart) => {
@@ -56,7 +55,6 @@ const App = () => {
   // subtotal of the cart must persist universally
   const totalCartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  // JSX formulation
   return (
     <div className="app-container">
       <Navbar

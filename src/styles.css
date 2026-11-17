@@ -283,6 +283,9 @@ body {
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
+.qty-controls button {
+  padding: 0.1rem 0.3rem;
+}
 
 .btn-remove {
   background: none;
