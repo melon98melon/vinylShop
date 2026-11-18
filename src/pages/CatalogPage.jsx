@@ -22,18 +22,16 @@ function CatalogPage({ products, onAddToCart }) {
           Sustainable ceramics shaped by hand for intentional daily rituals.
         </p>
       </header>
-
-      {/**this is how to comment INSIDE THE RETURN stmnt */}
       <div className="filter-bar">
-        {genres.map((cat) => {
+        {genres.map((gen) => (
           <button
-            key={cat}
-            className={`filter-pill ${selectedGenre === cat ? "active" : ""}`}
-            onClick={() => setSelectedGenre(cat)}
+            key={gen}
+            className={`filter-pill${selectedGenre === gen ? " active" : ""}`}
+            onClick={() => setSelectedGenre(gen)}
           >
-            {cat}
-          </button>;
-        })}
+            {gen}
+          </button>
+        ))}
       </div>
 
       <div className="product-grid">
