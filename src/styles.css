@@ -316,10 +316,18 @@ body {
   gap: 3rem;
   margin-top: 1.5rem;
 }
-
+.detail-grid {
+  margin: 1.5rem 1rem 4rem 1rem;
+}
 .detail-img {
   width: 100%;
   border-radius: 8px;
+}
+.cta-detail-grid {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 3rem;
+  gap: 1rem;
 }
 
 .form-group {
@@ -353,6 +361,46 @@ body {
   font-weight: 700;
   font-size: 1.2rem;
   margin-top: 0.5rem;
+}
+
+/* DETAILS PAGE */
+hr {
+  margin: 0.3rem 0rem;
+  border: solid 2px var(--primary);
+}
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.detail-price {
+  display: flex;
+  justify-content: end;
+  font-size: 20px;
+}
+.detail-actions {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.adittional-def-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 4rem 8rem;
+  gap: 1rem;
+}
+.track-list {
+  display: flex;
+  align-content: center;
+  padding: 1.5rem 5rem;
+  flex-direction: column;
+}
+
+.track-list ul {
+  list-style-type: none;
 }
 
 @media (max-width: 768px) {

@@ -7,13 +7,6 @@ const ProductDetailPage = ({ products, onAddToCart }) => {
 
   const product = products.find((p) => p.id === productId);
 
-  const [productData, setProductData] = useState({
-    fullName: "",
-    email: "",
-    shippingAddress: "",
-    zipCode: "",
-  });
-
   if (!product) {
     return (
       <div className="detail-error">
@@ -28,20 +21,20 @@ const ProductDetailPage = ({ products, onAddToCart }) => {
   return (
     <div className="detail-container">
       <nav className="breadcrumb">
-        <Link to="/">Catalog</Link> &gt; <span>{product.name}</span>
+        <Link to="/">Catalog</Link> &gt; <span>{product.title}</span>
       </nav>
 
       <div className="detail-grid">
         <img src={product.image} alt={product.name} className="detail-img" />
 
-        <div className="detail-info">
-          <span className="product-category">{product.category}</span>
-          <h1 className="detail-title">{product.name}</h1>
-          <p className="detail-price">{product.price.toFixed(2)}</p>
-          <p className="detail-desc">{product.description}</p>
+        <section className="detail-info">
+          <span className="product-category">{product.genre}</span>
+          <h1 className="detail-title">{product.title}</h1>
+          <p>{product.artist}</p>
+          <p className="detail-price">$ {product.price.toFixed(2)}</p>
           <div className="stock-tag">
             {product.stock > 0
-              ? "✓ In Stock ({product.stock} units available)"
+              ? `✓ In Stock (${product.stock} units available)`
               : "Out of Stock"}
           </div>
 
@@ -66,8 +59,39 @@ const ProductDetailPage = ({ products, onAddToCart }) => {
               Add {qty} to cart
             </button>
           </div>
-        </div>
+        </section>
       </div>
+      <hr />
+      <section className="adittional-def-container">
+        <h2 className="info-title">{product.title}</h2>
+        <p className="detail-desc">{product.description}</p>
+        <div className="track-list">
+          <h3>Track List</h3>
+          <hr />
+          <ul>
+            {product.tracklist?.map((track, index) => (
+              <li key={index}>⁘ {track}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="cta-detail-grid">
+          <button
+            className="btn btn-primary"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+              })
+            }
+          >
+            Back to Top
+          </button>
+          <Link to="/" className="btn btn-primary">
+            Continue Shopping
+          </Link>
+        </div>
+      </section>
     </div>
   );
 };
