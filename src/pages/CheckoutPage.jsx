@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const CheckoutPage = ({ cart, onClearCart }) => {
   // check whether the user has confirmed payment submission or not
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   // initialize the form field data object
   const [formData, setFormData] = useState({
@@ -12,8 +13,12 @@ const CheckoutPage = ({ cart, onClearCart }) => {
     email: "",
     shippingAddress: "",
     zipCode: "",
+    cardholderName: "",
+    cardNumber: "",
+    expirationDate: "",
+    securityCode: "",
   });
-
+  //#region invoice calculation
   //   compute the cart total for the invoice calc
   const subtotal = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -24,14 +29,30 @@ const CheckoutPage = ({ cart, onClearCart }) => {
   const taxes = subtotal * 0.06;
   const total = subtotal + taxes;
 
-  // <MISSED THIS FUNCTION IN CLASS>event listener to handle form input fields
+  //event listener to handle form input fields
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  //#endregion
+  //#region form even handlers
   //   event listener to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    setErrors([]);
+
+    const validationErrors = validateDataInput(formData);
+    console.log("errors: " + validationErrors);
+    if (validationErrors.length > 0) {
+      setErrors(validationErrors);
+      setIsSubmitted(false);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+      return;
+    }
+
     setIsSubmitted(true);
     onClearCart();
   };
@@ -53,6 +74,67 @@ const CheckoutPage = ({ cart, onClearCart }) => {
       </div>
     );
   }
+  //#endregion
+  //#region data validation
+  //input form validation:
+  function validateDataInput(data) {
+    const validationErrors = [];
+
+    // Full Name
+    if (!data.fullName.trim()) {
+      validationErrors.push("Full name is required");
+    }
+
+    // Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      validationErrors.push("Invalid email address");
+    }
+
+    // Shipping Address
+    if (data.shippingAddress.trim().length < 5) {
+      validationErrors.push("Address is too short");
+    }
+
+    // ZIP Code
+    const zipRegex = /^\d{5}(-\d{4})?$/;
+    if (!zipRegex.test(data.zipCode)) {
+      validationErrors.push("Invalid ZIP code");
+    }
+
+    // Cardholder Name
+    if (!data.cardholderName.trim()) {
+      validationErrors.push("Cardholder name is required");
+    }
+
+    // Card Number
+    const cardNumber = data.cardNumber.replace(/\s/g, "");
+    if (!/^\d{13,19}$/.test(cardNumber)) {
+      validationErrors.push("Invalid card number");
+    }
+
+    // Expiration Date
+    const expRegex = /^(0[1-9]|1[0-2])\/(\d{2})$/;
+    if (!expRegex.test(data.expirationDate)) {
+      validationErrors.push("Invalid expiration date");
+    } else {
+      const [month, year] = data.expirationDate.split("/");
+      const expiryDate = new Date(2000 + Number(year), Number(month));
+
+      if (expiryDate <= new Date()) {
+        validationErrors.push("Card has expired");
+      }
+    }
+
+    // CVV
+    if (!/^\d{3,4}$/.test(data.securityCode)) {
+      validationErrors.push("Invalid security code");
+    }
+
+    return validationErrors;
+  }
+
+  //#endregion
 
   // edge cases
   if (cart.length === 0) {
@@ -74,6 +156,17 @@ const CheckoutPage = ({ cart, onClearCart }) => {
         {/* FORM element */}
         <form className="checkout-form" onSubmit={handleSubmit}>
           <h2>Shipping Information</h2>
+          {errors.length > 0 && (
+            <div className="error-banner">
+              <p>Please correct the following:</p>
+
+              <ul>
+                {errors.map((message, index) => (
+                  <li key={index}>{message}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div className="form-group">
             <label htmlFor="fullName"> Full Name *</label>
             <input
@@ -119,10 +212,61 @@ const CheckoutPage = ({ cart, onClearCart }) => {
               onChange={handleChange}
             />
           </div>
+          <div className="form-group">
+            <label htmlFor="cardholderName"> Cardholder Name *</label>
+            <input
+              type="text"
+              name="cardholderName"
+              id="cardholderName"
+              required
+              value={formData.cardholderName}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="cardNumber"> Card Number *</label>
+            <input
+              type="text"
+              inputMode="numeric"
+              maxLength={19}
+              name="cardNumber"
+              id="cardNumber"
+              required
+              value={formData.cardNumber}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="expirationDate"> Expiration Date (MM/YY) *</label>
+            <input
+              type="text"
+              placeholder="MM/YY"
+              pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$"
+              name="expirationDate"
+              id="expirationDate"
+              required
+              value={formData.expirationDate}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="securityCode"> Security Code (CVC/CVV) *</label>
+            <input
+              title="3-digit number on the back of the card."
+              type="text"
+              name="securityCode"
+              id="securityCode"
+              required
+              inputMode="numeric"
+              pattern="^\d{3,4}$"
+              maxLength={4}
+              value={formData.securityCode}
+              onChange={handleChange}
+            />
+          </div>
           <button type="submit" className="btn btn-primary btn-block btn-lg">
             Complete Order (${total.toFixed(2)})
           </button>
-          {/* CHECK: handleSubmit and handleChange confusion */}
         </form>
 
         {/* INVOICE or SUMMARY section */}
@@ -132,7 +276,7 @@ const CheckoutPage = ({ cart, onClearCart }) => {
             {cart.map((item) => (
               <li key={item.id} className="summary-row">
                 <span>
-                  {item.name} &times; {item.quantity}
+                  {item.title} &times; {item.quantity}
                 </span>
                 <span>${(item.price * item.quantity).toFixed(2)}</span>
               </li>
