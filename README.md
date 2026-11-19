@@ -38,13 +38,19 @@ A responsive vinyl record storefront built with React and Vite. Browse a curated
 git clone https://github.com/melon98melon/vinylShop.git
 ```
 
-2. Install project dependencies:
+2. Navigate into the project folder:
+
+```bash
+cd vinylShop
+```
+
+3. Install project dependencies:
 
 ```bash
 npm install
 ```
 
-3. Install React Router:
+4. Install React Router:
 
 ```bash
 npm install react-router-dom
