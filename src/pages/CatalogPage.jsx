@@ -35,12 +35,8 @@ function CatalogPage({ products, onAddToCart }) {
       </div>
 
       <div className="product-grid">
-        {filteredProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onAddToCart={onAddToCart}
-          />
+        {filteredProducts.map((album) => (
+          <ProductCard key={album.id} album={album} onAddToCart={onAddToCart} />
         ))}
       </div>
     </div>

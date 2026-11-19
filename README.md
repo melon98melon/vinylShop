@@ -93,66 +93,66 @@ src/
 App
 ├── File: src/App.jsx
 ├── Owned state
-│   ├── cart: array of products and quantities
-│   └── isCartOpen: controls whether the cart drawer is visible
+│   ├── cart [Array]: products and quantities
+│   └── isCartOpen [Boolean]: controls whether the cart drawer is visible
 ├── Routes
 │   ├── /: CatalogPage
 │   ├── /product/:productId: ProductDetailPage
 │   └── /checkout: CheckoutPage
 ├── Callbacks
-│   ├── handleAddToCart(product, quantity)
-│   ├── handleUpdateQuantity(productId, delta)
-│   ├── handleRemoveFromCart(productId)
-│   └── handleClearCart()
+│   ├── handleAddToCart [Function]: (product [Object], quantity [Number])
+│   ├── handleUpdateQuantity [Function]: (productId [String], delta [Number])
+│   ├── handleRemoveFromCart [Function]: (productId [String])
+│   └── handleClearCart [Function]: no arguments
 ├── NavBar
 │   ├── File: src/components/NavBar.jsx
 │   ├── Owned state: none
 │   └── Props
-│       ├── cartCount: number of items in the cart
-│       └── onOpenCart: opens the cart drawer
+│       ├── cartCount [Number]: number of items in the cart
+│       └── onOpenCart [Function]: opens the cart drawer
 ├── CatalogPage
 │   ├── File: src/pages/CatalogPage.jsx
 │   ├── Route: /
 │   ├── Owned state
-│   │   └── selectedGenre: active catalog genre filter
-│   └── Props
-│       ├── products: album catalog data
-│       └── onAddToCart: callback passed to ProductCard
-│       └── Callback path: CatalogPage -> ProductCard -> onAddToCart
-├── ProductCard
-│   ├── File: src/components/ProductCard.jsx
-│   ├── Owned state: none
-│   └── Props
-│       ├── product: album data for the card
-│       └── onAddToCart: adds the product to the cart
+│   │   └── selectedGenre [String]: active catalog genre filter
+│   ├── Props
+│   │     ├── products [Array]: album catalog data
+│   │     └── onAddToCart [Function]: callback passed to ProductCard
+│   │     └── Callback path: CatalogPage -> ProductCard -> onAddToCart
+│   ├── ProductCard
+│   │   ├── File: src/components/ProductCard.jsx
+│   │   ├── Owned state: none
+│   │   └── Props
+│   │       ├── album [Object]: album data for the card
+│   │       └── onAddToCart [Function]: adds the product to the cart
 ├── ProductDetailPage
 │   ├── File: src/pages/ProductDetailPage.jsx
 │   ├── Route: /product/:productId
 │   ├── Owned state
-│   │   └── qty: selected product quantity
+│   │   └── qty [Number]: selected product quantity
 │   └── Props
-│       ├── products: album catalog data
-│       └── onAddToCart: adds the selected quantity to the cart
+│       ├── products [Array]: album catalog data
+│       └── onAddToCart [Function]: adds the selected quantity to the cart
 │       └── Callback path: ProductDetailPage -> onAddToCart(product, qty)
 ├── CheckoutPage
 │   ├── File: src/pages/CheckoutPage.jsx
 │   ├── Route: /checkout
 │   ├── Owned state
-│   │   ├── isSubmitted: controls the order confirmation
-│   │   ├── errors: checkout validation messages
-│   │   └── formData: shipping and payment form fields
+│   │   ├── isSubmitted [Boolean]: controls the order confirmation
+│   │   ├── errors [Array]: checkout validation messages
+│   │   └── formData [Object]: shipping and payment form fields
 │   └── Props
-│       ├── cart: products and quantities in the order
-│       └── onClearCart: clears the cart after a valid submission
+│       ├── cart [Array]: products and quantities in the order
+│       └── onClearCart [Function]: clears the cart after a valid submission
 └── CartDrawer
     ├── File: src/components/CartDrawer.jsx
     ├── Owned state: none
     └── Props
-        ├── cart: products and quantities in the cart
-        ├── isOpen: controls whether the drawer is rendered
-        ├── onClose: closes the cart drawer
-        ├── onUpdateQuantity: changes an item's quantity
-        └── onRemove: removes an item from the cart
+        ├── cart [Array]: products and quantities in the cart
+        ├── isOpen [Boolean]: controls whether the drawer is rendered
+        ├── onClose [Function]: closes the cart drawer
+        ├── onUpdateQuantity [Function]: changes an item's quantity
+        └── onRemove [Function]: removes an item from the cart
 ```
 
 ## State and Data Flow

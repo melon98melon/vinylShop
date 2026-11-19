@@ -71,7 +71,7 @@ const App = () => {
             }
           />
           <Route
-            path="/product/:productId"
+            path="/album/:albumId"
             element={
               <ProductDetailPage
                 products={ALBUMS}

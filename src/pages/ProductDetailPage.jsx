@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const ProductDetailPage = ({ products, onAddToCart }) => {
-  const { productId } = useParams();
+  const { albumId } = useParams();
   const [qty, setQty] = useState(1);
 
-  const product = products.find((p) => p.id === productId);
+  const product = products.find((p) => p.id === albumId);
 
   if (!product) {
     return (
@@ -25,7 +25,7 @@ const ProductDetailPage = ({ products, onAddToCart }) => {
       </nav>
 
       <div className="detail-grid">
-        <img src={product.image} alt={product.name} className="detail-img" />
+        <img src={product.image} alt={product.title} className="detail-img" />
 
         <section className="detail-info">
           <span className="product-category">{product.genre}</span>
@@ -58,6 +58,27 @@ const ProductDetailPage = ({ products, onAddToCart }) => {
             >
               Add {qty} to cart
             </button>
+          </div>
+          <div className="specs-container">
+            <h3 className="specs-title">Specs</h3>
+            <ul className="specs">
+              {product.specs && (
+                <>
+                  <li key={product.specs.catalogNumber}>
+                    Catalog Number: {product.specs.catalogNumber}
+                  </li>
+                  <li key={product.specs.weight}>
+                    Weight: {product.specs.weight}
+                  </li>
+                  <li key={product.specs.speed}>
+                    Speed: {product.specs.speed}
+                  </li>
+                  <li key={product.specs.label}>
+                    Label: {product.specs.label}
+                  </li>
+                </>
+              )}
+            </ul>
           </div>
         </section>
       </div>

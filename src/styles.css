@@ -114,6 +114,7 @@ body {
 }
 
 .filter-pill {
+  color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
   padding: 0.4rem 1.2rem;
@@ -345,6 +346,13 @@ body {
   border-radius: 6px;
 }
 
+.payment-info-small,
+.shipping-info-small {
+  display: grid;
+  gap: 2rem;
+  grid-auto-flow: column;
+}
+
 .order-summary-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -402,6 +410,7 @@ hr {
   gap: 1rem;
   flex-direction: column;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .adittional-def-container {
@@ -420,6 +429,9 @@ hr {
 
 .track-list ul {
   list-style-type: none;
+}
+.specs {
+  margin: 0rem 4rem;
 }
 
 @media (max-width: 768px) {

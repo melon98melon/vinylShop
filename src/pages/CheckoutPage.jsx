@@ -186,28 +186,30 @@ const CheckoutPage = ({ cart, onClearCart }) => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="shippingAddress"> Shipping Address *</label>
-            <input
-              type="text"
-              name="shippingAddress"
-              id="shippingAddress"
-              required
-              value={formData.shippingAddress}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="zipCode"> Zip Code*</label>
-            <input
-              type="text"
-              name="zipCode"
-              id="zipCode"
-              required
-              pattern="[0-9]{5}"
-              value={formData.zipCode}
-              onChange={handleChange}
-            />
+          <div className="shipping-info-small">
+            <div className="form-group">
+              <label htmlFor="shippingAddress"> Shipping Address *</label>
+              <input
+                type="text"
+                name="shippingAddress"
+                id="shippingAddress"
+                required
+                value={formData.shippingAddress}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="zipCode"> Zip Code*</label>
+              <input
+                type="text"
+                name="zipCode"
+                id="zipCode"
+                required
+                pattern="[0-9]{5}"
+                value={formData.zipCode}
+                onChange={handleChange}
+              />
+            </div>
           </div>
           <div className="form-group">
             <label htmlFor="cardholderName"> Cardholder Name *</label>
@@ -233,33 +235,35 @@ const CheckoutPage = ({ cart, onClearCart }) => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="expirationDate"> Expiration Date (MM/YY) *</label>
-            <input
-              type="text"
-              placeholder="MM/YY"
-              pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$"
-              name="expirationDate"
-              id="expirationDate"
-              required
-              value={formData.expirationDate}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="securityCode"> Security Code (CVC/CVV) *</label>
-            <input
-              title="3-digit number on the back of the card."
-              type="text"
-              name="securityCode"
-              id="securityCode"
-              required
-              inputMode="numeric"
-              pattern="^\d{3,4}$"
-              maxLength={4}
-              value={formData.securityCode}
-              onChange={handleChange}
-            />
+          <div className="payment-info-small">
+            <div className="form-group">
+              <label htmlFor="expirationDate"> Expiration Date (MM/YY) *</label>
+              <input
+                type="text"
+                placeholder="MM/YY"
+                pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$"
+                name="expirationDate"
+                id="expirationDate"
+                required
+                value={formData.expirationDate}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="securityCode"> Security Code (CVC/CVV) *</label>
+              <input
+                title="3-digit number on the back of the card."
+                type="text"
+                name="securityCode"
+                id="securityCode"
+                required
+                inputMode="numeric"
+                pattern="^\d{3,4}$"
+                maxLength={4}
+                value={formData.securityCode}
+                onChange={handleChange}
+              />
+            </div>
           </div>
           <button type="submit" className="btn btn-primary btn-block btn-lg">
             Complete Order (${total.toFixed(2)})
