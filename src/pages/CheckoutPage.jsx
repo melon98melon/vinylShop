@@ -63,10 +63,7 @@ const CheckoutPage = ({ cart, onClearCart }) => {
         <h2>Order Placed Successfully</h2>
         <p>
           Thank you, {formData.fullName}. A confirmation email is sent to{" "}
-          {formData.email}. <br /> Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Amet quisquam quod impedit dolorum animi eius iusto,
-          non soluta autem officia nostrum totam obcaecati quis, fugiat nihil
-          possimus voluptates illo dolores.
+          {formData.email}.
         </p>
         <Link className="btn btn-primary" to="/">
           Return to Home Page

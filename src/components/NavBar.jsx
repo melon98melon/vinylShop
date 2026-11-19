@@ -7,7 +7,7 @@ const Navbar = ({ cartCount, onOpenCart }) => {
     <header className="site-header">
       <div className="header-inner">
         <Link className="brand-logo" to="/">
-          🏺TerraCraft
+          🎼 Vinyl Shop
         </Link>
         <nav className="nav-actions">
           <Link className="nav-link" to="/">

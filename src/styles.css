@@ -1,12 +1,12 @@
 /* src/styles.css  */
 :root {
-  --bg: #fafaf9;
-  --surface: #ffffff;
-  --text: #1c1917;
-  --muted: #78716c;
-  --border: #e7e5e4;
-  --primary: #854d0e;
-  --primary-hover: #713f12;
+  --bg: #0b021c;
+  --surface: #15082c;
+  --text: #ffffff;
+  --muted: #b8b8b7;
+  --border: #1c0543;
+  --primary: #7907a9;
+  --primary-hover: #610887;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -29,7 +29,7 @@ body {
 .site-header {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--surface);
   backdrop-filter: blur(5px);
   border-bottom: 1px solid var(--border);
   z-index: 100;
@@ -64,7 +64,7 @@ body {
 }
 
 .btn-cart-badge {
-  background: var(--surface);
+  background: var(--primary);
   border: 1px solid var(--border);
   padding: 0.5rem 1rem;
   border-radius: 9999px;
@@ -73,6 +73,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   font-weight: 600;
+  color: var(--text);
 }
 
 .badge-pill {
@@ -246,6 +247,7 @@ body {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+  color: var(--text);
 }
 
 .drawer-body {
@@ -373,6 +375,13 @@ body {
   color: #ffffff;
 }
 
+.checkout-success {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+}
 /* DETAILS PAGE */
 hr {
   margin: 0.3rem 0rem;
